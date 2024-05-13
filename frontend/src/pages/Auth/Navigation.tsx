@@ -56,7 +56,7 @@ const adminRoute: { name: string; link: string }[] = [
   },
   {
     name: "users",
-    link: "/admin/users",
+    link: "/admin/userslist",
   },
 ];
 
@@ -79,6 +79,7 @@ const Navigation = () => {
       await logoutApiCall().unwrap();
       dispatch(logOut());
       navigate("/login");
+      setIsDropdown(false);
     } catch (error) {
       console.log(error);
     }
@@ -88,7 +89,7 @@ const Navigation = () => {
     <nav
       className={`z-[999] ${
         showSidebar ? "hidden" : "flex"
-      } lg:flex sm:hidden flex-col justify-between p-2 text-white bg-black w-[4%] hover:w-[15%] h-svh fixed transition-[width] duration-300 ease-in-out group`}
+      } lg:flex sm:hidden hide flex-col justify-between p-2 text-white bg-black w-[3.9%] hover:w-[15%] h-svh fixed transition-[width] duration-300 ease-in-out group overflow-hidden`}
     >
       <div className="flex flex-col justify-center">
         {links.map((link) => {
@@ -114,7 +115,9 @@ const Navigation = () => {
           className="flex items-center text-gray-800 focus:outline-none"
         >
           {userInfo ? (
-            <span className="text-white">{userInfo.username}</span>
+            <span className="text-white line-clamp-1 capitalize">
+              {userInfo.username}
+            </span>
           ) : (
             <></>
           )}
@@ -140,8 +143,8 @@ const Navigation = () => {
 
         {isDropdown && userInfo && (
           <ul
-            className={`absolute -right-14 mt-2 mr-14 space-y-1 bg-white text-gray-600 ${
-              userInfo.isAdmin ? "-top-60" : "-top-[4.5rem]"
+            className={`absolute -right-14 mt-2 mr-14 space-y-1 rounded-md bg-slate-950 overflow-hidden ${
+              userInfo.isAdmin ? "-top-64" : "-top-[4.5rem]"
             }`}
           >
             {userInfo.isAdmin &&
@@ -150,7 +153,7 @@ const Navigation = () => {
                   <Link
                     to={route.link}
                     onClick={() => setIsDropdown(false)}
-                    className="block px-4 py-2 hover:bg-gray-100 capitalize"
+                    className="block px-4 py-2 hover:bg-gray-100 hover:text-slate-950 capitalize w-full"
                   >
                     {route.name}
                   </Link>
@@ -161,7 +164,7 @@ const Navigation = () => {
               <Link
                 to="/profile"
                 onClick={() => setIsDropdown(false)}
-                className="block px-4 py-2 hover:bg-gray-100 capitalize"
+                className="block px-4 py-2 hover:bg-gray-100 hover:text-slate-950 capitalize"
               >
                 Profile
               </Link>
@@ -169,7 +172,7 @@ const Navigation = () => {
             <li>
               <button
                 onClick={logOutHandler}
-                className="block px-4 py-2 hover:bg-gray-100 capitalize w-full text-left"
+                className="block px-4 py-2 hover:bg-red-500 capitalize w-full text-left"
               >
                 Logout
               </button>

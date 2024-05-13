@@ -43,7 +43,7 @@ const Login = () => {
         <div className="mr-16 mt-20">
           <h1 className="text-2xl font-semibold mb-4">Sign In</h1>
 
-          <form onSubmit={handlerSubmit} className="container w-[40rem]">
+          <form onSubmit={handlerSubmit} className="container w-[28rem]">
             <div className="my-8">
               <label
                 htmlFor="email"

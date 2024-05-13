@@ -48,7 +48,7 @@ const Register = () => {
       <div className="mr-16 my-20">
         <h1 className="text-2xl font-semibold mb-4">Register</h1>
 
-        <form onSubmit={handleSubmit} className="container w-[40rem] ">
+        <form onSubmit={handleSubmit} className="container w-[28rem] ">
           <div className="my-8">
             <label htmlFor="username" className="block text-sm font-medium">
               Username
@@ -57,7 +57,6 @@ const Register = () => {
               type="text"
               id="username"
               className="mt-1 p-2 border rounded w-full text-black"
-              placeholder="Enter username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -70,7 +69,6 @@ const Register = () => {
               type="text"
               id="email"
               className="mt-1 p-2 border rounded w-full text-black"
-              placeholder="Enter email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -82,8 +80,8 @@ const Register = () => {
             <input
               type="password"
               id="password"
+              autoComplete="new-password"
               className="mt-1 p-2 border rounded w-full text-black"
-              placeholder="Enter password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -98,8 +96,8 @@ const Register = () => {
             <input
               type="password"
               id="confirmPassword"
+              autoComplete="new-password"
               className="mt-1 p-2 border rounded w-full text-black"
-              placeholder="Enter confirm password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
