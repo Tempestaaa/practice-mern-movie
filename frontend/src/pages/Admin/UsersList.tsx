@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import {
   useGetUsersQuery,
   useDeleteUserMutation,
-  useGetUserDetailsQuery,
   useUpdateUserMutation,
 } from "../../redux/api/usersApiSlice";
 import Loader from "../../components/Loader";
