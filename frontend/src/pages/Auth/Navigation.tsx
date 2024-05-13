@@ -52,7 +52,7 @@ const adminRoute: { name: string; link: string }[] = [
   },
   {
     name: "genres",
-    link: "/admin/genres",
+    link: "/admin/genreslist",
   },
   {
     name: "users",

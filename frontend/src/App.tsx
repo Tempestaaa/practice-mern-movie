@@ -6,6 +6,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./pages/User/Profile";
 import AdminRoute from "./pages/Admin/AdminRoute";
 import UsersList from "./pages/Admin/UsersList";
+import GenresList from "./pages/Admin/GenresList";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         {/* Admin */}
         <Route path="/admin" element={<AdminRoute />}>
           <Route path="userslist" element={<UsersList />} />
+          <Route path="genreslist" element={<GenresList />} />
         </Route>
       </Route>
     </Routes>
