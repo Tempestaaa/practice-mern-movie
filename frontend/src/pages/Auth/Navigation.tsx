@@ -51,8 +51,8 @@ const adminRoute: { name: string; link: string }[] = [
     link: "/admin/movies",
   },
   {
-    name: "genres",
-    link: "/admin/genreslist",
+    name: "categories",
+    link: "/admin/categorieslist",
   },
   {
     name: "users",

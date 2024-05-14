@@ -1,32 +1,32 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import {
-  useCreateGenreMutation,
-  useDeleteGenreMutation,
-  useGetAllGenresQuery,
-  useUpdateGenreMutation,
-} from "../../redux/api/genresApiSlice";
-import GenreForm from "../../components/GenreForm";
+  useCreateCategoryMutation,
+  useDeleteCategoryMutation,
+  useGetAllCategoriesQuery,
+  useUpdateCategoryMutation,
+} from "../../redux/api/categoriesApiSlice";
+import CategoryForm from "../../components/CategoryForm";
 import Modal from "../../components/Modal";
-import { GenreType } from "../../types/genre.type";
+import { CategoryType } from "../../types/category.type";
 
-const GenresList = () => {
+const CategoriesList = () => {
   const [name, setName] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState<GenreType>({
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType>({
     _id: "",
     name: "",
   });
   const [updateName, setUpdateName] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { data: genres } = useGetAllGenresQuery();
-  const [createGern] = useCreateGenreMutation();
-  const [updateGenre] = useUpdateGenreMutation();
-  const [deleteGenre] = useDeleteGenreMutation();
+  const { data: categories } = useGetAllCategoriesQuery();
+  const [createGern] = useCreateCategoryMutation();
+  const [updateCategory] = useUpdateCategoryMutation();
+  const [deleteCategory] = useDeleteCategoryMutation();
 
-  const handleCreateGenre = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleCreateCategory = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!name) return toast.error("Genre name is required");
+    if (!name) return toast.error("Category name is required");
 
     try {
       const res = await createGern({ name }).unwrap();
@@ -37,23 +37,23 @@ const GenresList = () => {
       toast.success(`${res.name} is created`);
     } catch (error) {
       console.log(error);
-      toast.error("Creating genre failed, try again");
+      toast.error("Creating category failed, try again");
     }
   };
 
-  const handleUpdateGenre = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdateCategory = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!updateName) return toast.error("Genre name is required");
+    if (!updateName) return toast.error("Category name is required");
     try {
-      const res = await updateGenre({
-        genreId: selectedGenre._id,
-        updatedGenre: {
+      const res = await updateCategory({
+        categoryId: selectedCategory._id,
+        updatedCategory: {
           name: updateName,
         },
       }).unwrap();
       if (res.message) return toast.error(res.message);
       toast.success(`${res.name} is updated`);
-      setSelectedGenre({
+      setSelectedCategory({
         _id: "",
         name: "",
       });
@@ -64,18 +64,18 @@ const GenresList = () => {
     }
   };
 
-  const handleDeleteGenre = async () => {
+  const handleDeleteCategory = async () => {
     try {
-      const res = await deleteGenre(selectedGenre._id).unwrap();
+      const res = await deleteCategory(selectedCategory._id).unwrap();
       toast.success(res.message);
-      setSelectedGenre({
+      setSelectedCategory({
         _id: "",
         name: "",
       });
       setIsModalOpen(false);
     } catch (error) {
       console.log(error);
-      toast.error("Genre delection failed. Try again");
+      toast.error("Category delection failed. Try again");
     }
   };
 
@@ -83,40 +83,40 @@ const GenresList = () => {
     <div className="ml-40 flex flex-col md:flex-row">
       {/* Admin Menu */}
       <div className="md:w-3/4 p-3">
-        <div className="h-12">Manage Genres</div>
-        <GenreForm
+        <div className="h-12">Manage Categories</div>
+        <CategoryForm
           value={name}
           setValue={setName}
-          handleSubmit={handleCreateGenre}
+          handleSubmit={handleCreateCategory}
         />
         <br />
         <hr />
 
         <div className="flex flex-wrap">
-          {genres &&
-            genres.map((genre) => (
-              <div key={genre._id}>
+          {categories &&
+            categories.map((category) => (
+              <div key={category._id}>
                 <button
                   className="bg-white border-pink-500 text-pink-500 py-2 px-4 rounded-lg m-3 hover:bg-pink-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50"
                   onClick={() => {
                     setIsModalOpen(true);
-                    setSelectedGenre(genre);
-                    setUpdateName(genre.name);
+                    setSelectedCategory(category);
+                    setUpdateName(category.name);
                   }}
                 >
-                  {genre.name}
+                  {category.name}
                 </button>
               </div>
             ))}
         </div>
 
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <GenreForm
+          <CategoryForm
             value={updateName}
             setValue={(value) => setUpdateName(value)}
-            handleSubmit={handleUpdateGenre}
+            handleSubmit={handleUpdateCategory}
             buttonText="Update"
-            handleDelete={handleDeleteGenre}
+            handleDelete={handleDeleteCategory}
           />
         </Modal>
       </div>
@@ -124,4 +124,4 @@ const GenresList = () => {
   );
 };
 
-export default GenresList;
+export default CategoriesList;

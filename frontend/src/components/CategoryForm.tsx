@@ -6,7 +6,7 @@ type Props = {
   handleDelete?: () => void;
 };
 
-const GenreForm = ({
+const CategoryForm = ({
   value,
   setValue,
   handleSubmit,
@@ -19,7 +19,7 @@ const GenreForm = ({
         <input
           type="text"
           className="py-3 px-4 border rounded-lg w-full text-black"
-          placeholder="Write genre name"
+          placeholder="Write category name"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
@@ -44,4 +44,4 @@ const GenreForm = ({
   );
 };
 
-export default GenreForm;
+export default CategoryForm;
