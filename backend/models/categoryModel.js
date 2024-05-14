@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const genreSchema = mongoose.Schema({
+const categorySchema = mongoose.Schema({
   name: {
     type: String,
     trim: true,
@@ -9,6 +9,6 @@ const genreSchema = mongoose.Schema({
   },
 });
 
-const Genre = mongoose.model("Genre", genreSchema);
+const Category = mongoose.model("Category", categorySchema);
 
-export default Genre;
+export default Category;
